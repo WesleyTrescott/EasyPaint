@@ -27,7 +27,7 @@
 #define BINARIZATIONEFFECT_H
 
 #include "abstracteffect.h"
-
+#include "../imagearea.h"
 #include <QtCore/QObject>
 
 /**
@@ -41,6 +41,7 @@ public:
     explicit BinarizationEffect(QObject *parent = 0);
     
     void applyEffect(ImageArea &imageArea);
+    QRgb applyBinarizationEffect(QRgb pixel, int coeff1, int coeff2);
 
 private:
     void makeBinarization(ImageArea &imageArea, int coeff1, int coeff2);

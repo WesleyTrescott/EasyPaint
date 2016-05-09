@@ -27,7 +27,7 @@
 #define GAMMAEFFECT_H
 
 #include "abstracteffect.h"
-
+#include "../imagearea.h"
 #include <QtCore/QObject>
 
 /**
@@ -38,9 +38,11 @@ class GammaEffect : public AbstractEffect
 {
     Q_OBJECT
 public:
+
     explicit GammaEffect(QObject *parent = 0);
     
     void applyEffect(ImageArea &imageArea);
+    QRgb applyGammaEffect(QRgb pixel, float modifier);
     
 private:
     void makeGamma(ImageArea &imageArea, float modificator);

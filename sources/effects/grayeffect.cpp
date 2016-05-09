@@ -41,11 +41,16 @@ void GrayEffect::applyEffect(ImageArea &imageArea)
         for(int y(0); y < imageArea.getImage()->height(); y++)
         {
             QRgb pixel(imageArea.getImage()->pixel(i, y));
-            int rgb = (int)(0.299 * qRed(pixel) + 0.587 * qGreen(pixel) + 0.114 * qBlue(pixel));
-            pixel = qRgb(rgb, rgb, rgb);
+            pixel = applyGrayEffect(pixel);
             imageArea.getImage()->setPixel(i, y, pixel);
         }
     }
     imageArea.setEdited(true);
     imageArea.update();
+}
+
+QRgb GrayEffect::applyGrayEffect(QRgb pixel) {
+    int rgb = (int)(0.299 * qRed(pixel) + 0.587 * qGreen(pixel) + 0.114 * qBlue(pixel));
+    pixel = qRgb(rgb, rgb, rgb);
+    return pixel;
 }

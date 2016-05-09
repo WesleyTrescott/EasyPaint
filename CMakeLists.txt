@@ -118,6 +118,7 @@ include_directories (./)
 
 find_package (Qt5Widgets REQUIRED)
 find_package(Qt5PrintSupport REQUIRED)
+find_package(Qt5Test REQUIRED)
 include_directories(${Qt5Widgets_INCLUDES})
 add_definitions(${Qt5Widgets_DEFINITIONS})
 
@@ -127,6 +128,10 @@ qt5_add_resources (QRC_SOURCES ${RESOURCES})
 qt5_wrap_cpp (MOC_SOURCES ${HEADERS})
 
 add_definitions (-Wall)
+
+enable_testing()
+set(TEST_LINKED_LIBRARIES Qt5::Test)
+add_subdirectory(test)
 
 source_group ("Header Files" FILES ${HEADERS})
 source_group ("Source Files" FILES ${SOURCES})

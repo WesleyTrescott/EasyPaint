@@ -27,7 +27,7 @@
 #define GRAYEFFECT_H
 
 #include "abstracteffect.h"
-
+#include "../imagearea.h"
 #include <QtCore/QObject>
 
 /**
@@ -41,7 +41,7 @@ public:
     explicit GrayEffect(QObject *parent = 0);
     
     void applyEffect(ImageArea &imageArea);
-
+    QRgb applyGrayEffect(QRgb pixel);
 };
 
 #endif // GRAYEFFECT_H

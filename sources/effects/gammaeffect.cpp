@@ -24,7 +24,6 @@
  */
 
 #include "gammaeffect.h"
-#include "../imagearea.h"
 
 #include <math.h>
 
@@ -51,14 +50,19 @@ void GammaEffect::makeGamma(ImageArea &imageArea, float modificator)
         for(int y(0); y < imageArea.getImage()->height(); y++)
         {
             QRgb pixel = imageArea.getImage()->pixel(x, y);
-            float r = qRed(pixel);
-            r = 255 * pow(r / 255, modificator);
-            float g = qGreen(pixel);
-            g = 255 * pow(g / 255, modificator);
-            float b = qBlue(pixel);
-            b = 255 * pow(b / 255, modificator);
-            pixel = qRgb(r, g, b);
+            pixel = applyGammaEffect(pixel, modificator);
             imageArea.getImage()->setPixel(x, y, pixel);
         }
     }
+}
+
+QRgb GammaEffect::applyGammaEffect(QRgb pixel, float modifier) {
+    float r = qRed(pixel);
+    r = 255 * pow(r / 255, modifier);
+    float g = qGreen(pixel);
+    g = 255 * pow(g / 255, modifier);
+    float b = qBlue(pixel);
+    b = 255 * pow(b / 255, modifier);
+    pixel = qRgb(r, g, b);
+    return pixel;
 }
