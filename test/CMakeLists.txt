@@ -93,11 +93,15 @@ set(TESTSOURCES
     ${PROJECT_SOURCE_DIR}/sources/instruments/curvelineinstrument.cpp
     ${PROJECT_SOURCE_DIR}/sources/instruments/textinstrument.cpp)
 
+SET(CMAKE_CXX_FLAGS "-g -O0 -Wall -fprofile-arcs -ftest-coverage")
+SET(CFLAGS "-g -O0 -Wall -W -fprofile-arcs -ftest-coverage")
+SET(LDFLAGS "-fprofile-arcs -ftest-coverage")
+
 qt5_wrap_cpp(MOC_TESTSOURCES ${TESTHEADERS})
 
 add_executable(easypainttests ${TESTHEADERS} ${TESTSOURCES} ${MOC_TESTSOURCES})
 
 # Need to link in Widgets library so that the test application can be a QApplication
-target_link_libraries(easypainttests Qt5::Test Qt5::Widgets Qt5::PrintSupport)
+target_link_libraries(easypainttests Qt5::Test Qt5::Widgets Qt5::PrintSupport gcov)
 add_test(GammaEffectTest.cpp easypainttests)
 
